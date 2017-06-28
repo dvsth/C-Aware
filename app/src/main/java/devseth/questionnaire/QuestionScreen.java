@@ -14,7 +14,7 @@ import static android.view.animation.Animation.REVERSE;
 
 public class QuestionScreen extends AppCompatActivity {
 
-    TextView txt1;                                      //textview that displays questions
+    TextView txtQues;                                   //textview that displays questions
     View background;                                    //the background of the window
     private QuestionFeeder questionFeeder;              //provides questions
 
@@ -25,12 +25,13 @@ public class QuestionScreen extends AppCompatActivity {
         setContentView(R.layout.activity_question_screen);
 
         //Object declarations
-        txt1 = (TextView) findViewById(R.id.textView1);
+        txtQues = (TextView) findViewById(R.id.textView1);
         background = findViewById(R.id.background);
         questionFeeder = new QuestionFeeder();
 
         //Ignition for animation
         bgAnimator();
+        txtQues.setText(questionFeeder.nextQuestion());
     }
 
     private void bgAnimator() {
