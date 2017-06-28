@@ -39,7 +39,7 @@
         android:layout_marginBottom="8dp">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnYes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
@@ -47,13 +47,13 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:text="Button"
+            android:text="Yes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/button3" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnNo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
@@ -61,11 +61,19 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:text="Button"
+            android:text="No"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/button3" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/recordDisplay"
+        android:layout_width="364dp"
+        android:layout_height="0dp"
+        android:text="Display the record"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="229dp" />
 
 </android.support.constraint.ConstraintLayout>

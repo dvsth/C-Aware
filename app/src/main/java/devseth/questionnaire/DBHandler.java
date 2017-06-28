@@ -2,6 +2,7 @@ package devseth.questionnaire;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -21,6 +22,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     //identifier - primary key
     private static final String KEY_ID = "id";
+    private static int counter;
 
     //demographics
     private static final String DEM_AGE = "age";
@@ -39,11 +41,16 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+
         //set reference to database we are handling
         database = db;
 
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_RESPONSES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + DEM_AGE + " INTEGER,"
+        //starting the primary key field from 0;
+        counter = 0;
+
+        //create the table with relevant columns
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_RESPONSES + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DEM_AGE + " INTEGER,"
                 + DEM_SEX + " TEXT," + RES_ALL + " TEXT" + ")";
         database.execSQL(CREATE_CONTACTS_TABLE);
 
@@ -62,18 +69,30 @@ public class DBHandler extends SQLiteOpenHelper {
 
         String concatResponses = "";
 
-        for (int i = 3; i < inputResponses.length; i++) {
+        for (int i = 0; i < inputResponses.length; i++) {
             concatResponses += inputResponses[i];
         }
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, 1);
-        values.put(DEM_AGE, inputResponses[1]);
-        values.put(DEM_SEX, inputResponses[2]);
+        //values.put(KEY_ID, (int) (100*Math.random()));
+        values.put(DEM_AGE, "1");
+        values.put(DEM_SEX, "Male");
         values.put(RES_ALL, concatResponses);
-        database.insert(TABLE_RESPONSES, null, values);
+        getWritableDatabase().insert(TABLE_RESPONSES, null, values);
 
     }
+
+    public String displayResponse(){
+
+        Cursor row  = database.rawQuery("SELECT RESPONSES FROM " + TABLE_RESPONSES + " WHERE id='1';", null);
+        return row.getString(0);
+
+    }
+
+
+
+
+
 
 
 }

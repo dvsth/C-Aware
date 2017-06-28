@@ -23,7 +23,7 @@ public class QuestionFeeder {
         q9 = "Question 9";
         q10 = "Question 10";
 
-        questions = new String[]{q1, q2, q3, q4, q5, q6, q7, q8, q9, q10};
+        questions = new String[]{q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, "", "", "", "", "", "", "", "", ""};
 
         questionIndex = -1;
     }
@@ -32,7 +32,7 @@ public class QuestionFeeder {
 
         questionIndex++;                                        //goto next question
 
-        if (questionIndex==questions.length)                    //have we reached the last question?
+        if (questionIndex == questions.length)                    //have we reached the last question?
             return "end";                                       //if yes, return end
 
         return questions[questionIndex];                        //or else return the next question
