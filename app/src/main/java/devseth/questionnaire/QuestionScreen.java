@@ -1,6 +1,8 @@
 package devseth.questionnaire;
 
 import android.animation.ValueAnimator;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +16,10 @@ import static android.view.animation.Animation.REVERSE;
 
 public class QuestionScreen extends AppCompatActivity {
 
-    TextView txtQues;                                   //textview that displays questions
+    TextView txtQues;                                   //TextView that displays questions
     View background;                                    //the background of the window
     private QuestionFeeder questionFeeder;              //provides questions
+    private SQLiteOpenHelper dbhelper;
 
 
     @Override
@@ -32,14 +35,17 @@ public class QuestionScreen extends AppCompatActivity {
         //Ignition for animation
         bgAnimator();
         txtQues.setText(questionFeeder.nextQuestion());
+
+
     }
+
 
     private void bgAnimator() {
 
         //Colors the animation cycles through
         //PaleVioletRed, Light Green, Soft Blue, Faded Yellow, PaleVioletRed
-        ValueAnimator anim = ValueAnimator.ofArgb(Color.rgb(219, 112, 147), Color.rgb(169,210,106),
-                Color.rgb(186, 228, 240), Color.rgb(255,255,213), Color.rgb(219, 112, 147));
+        ValueAnimator anim = ValueAnimator.ofArgb(Color.rgb(219, 112, 147), Color.rgb(169, 210, 106),
+                Color.rgb(186, 228, 240), Color.rgb(255, 255, 213), Color.rgb(219, 112, 147));
 
         //create the animator
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
