@@ -33,7 +33,7 @@ public class QuestionFeeder {
         questionIndex++;                                        //goto next question
 
         if (questionIndex == questions.length)                    //have we reached the last question?
-            return "end";                                       //if yes, return end
+            return "end";                                         //if yes, return end
 
         return questions[questionIndex];                        //or else return the next question
     }

@@ -70,10 +70,14 @@
 
     <Button
         android:id="@+id/recordDisplay"
-        android:layout_width="364dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="30dp"
         android:text="Display the record"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="229dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
 </android.support.constraint.ConstraintLayout>

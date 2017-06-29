@@ -71,6 +71,7 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
             btnNo.setEnabled(false);
             dbhelper.addSurveyResponse(responses);
             Log.d(null, "onClick: the response was added to database");
+            questionIndex++;
 
         } else {
             switch (v.getId()) {
@@ -82,7 +83,7 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
                     responses[++questionIndex] = "1";
                     break;
                 case R.id.recordDisplay:
-                    txtQues.setText("ABCDEFG");
+                    txtQues.setText(dbhelper.displayResponse());
                     break;
 
 
