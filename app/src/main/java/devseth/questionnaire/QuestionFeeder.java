@@ -33,7 +33,7 @@ public class QuestionFeeder {
         questionIndex++;                                        //goto next question
 
         if (questionIndex >= questions.length)                    //have we reached the last question?
-            return "-1";                                         //if yes, return end
+            return "Survey Complete!";                                         //if yes, return end
 
         return questions[questionIndex];                        //or else return the next question
     }

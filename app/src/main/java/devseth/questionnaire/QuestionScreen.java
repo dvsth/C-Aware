@@ -1,13 +1,12 @@
 package devseth.questionnaire;
 
+import android.Manifest;
 import android.animation.ValueAnimator;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.CountDownTimer;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +14,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-
-import static android.view.animation.Animation.REVERSE;
-
 public class QuestionScreen extends AppCompatActivity implements View.OnClickListener {
 
+    //permissions
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
     TextView txtQues;                                   //TextView that displays questions
     EditText txtName;                                   //input for name
     EditText txtAge;                                    //input for age
@@ -60,8 +56,11 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         questionFeeder = new QuestionFeeder();
 
         responses = new String[12];
+        String blank = "";
+        for (int i = 0; i < responses.length; i++)
+            responses[i] = blank;
 
-        questionIndex = 2;
+        questionIndex = 1;
 
         isGoOver = false;
 
@@ -76,19 +75,34 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         //Set the question in the textview
         txtQues.setText(questionFeeder.nextQuestion());
 
-        dbhelper = new DBHandler(this);
+        dbhelper = new DBHandler(getApplicationContext());
+
+        int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, 1);
+        }
 
     }
 
     public void onClick(View v) {
 
-        if (isGoOver && questionIndex < 12){
-            txtQues.setText(questionFeeder.nextQuestion());
+        boolean isLast = false;
+
+        if (isGoOver) {
             questionIndex++;
+
+            if (questionIndex == 11)
+                isLast = true;
+
+            txtQues.setText(questionFeeder.nextQuestion());
+
             Log.d(null, "Reached first if");
+            Log.d(null, "value of questionIndex is:" + questionIndex);
         }
 
-        if (txtQues.getText().equals("Question 10")) {
+        if (!isLast && txtQues.getText().equals("Survey Complete!")) {
 
             btnYes.setEnabled(false);                           //disable buttons
             btnNo.setEnabled(false);
@@ -96,16 +110,34 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
             dbhelper.writeToCSV();                              //update the csv file
             Log.d(null, "wrote to CSV");
 
+            //!!!TEST ONLY!!!
+            //String test = "teststring for concated responses";
+            //for(int c = 0; c < responses.length; c++)
+            //  test = test.concat(responses[c]);
+            //txtQues.setText(test);
 
         } else {
             switch (v.getId()) {
 
                 case R.id.btnNo:
                     responses[questionIndex] = "0";
+
+                    Log.d(null, "Value of responses at " + questionIndex + " is: " + responses[questionIndex]);
+                    if (isLast) {
+                        isGoOver = false;
+
+                    }
                     break;
                 case R.id.btnYes:
                     responses[questionIndex] = "1";
+                    Log.d(null, "Value of responses at " + questionIndex + " is: " + responses[questionIndex]);
+
+                    if (isLast) {
+                        isGoOver = false;
+
+                    }
                     break;
+
                 case R.id.btnGo:
 
                     isGoOver = true;
@@ -122,11 +154,11 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
 
                     //add input fields into row array
                     responses[0] = txtAge.getText().toString();
+
                     if (btnMale.isChecked())
                         responses[1] = "male";
                     else
                         responses[1] = "female";
-                    break;
 
 
             }
