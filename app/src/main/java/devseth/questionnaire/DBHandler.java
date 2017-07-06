@@ -130,7 +130,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         try {
 
-            exportCSV = new File(exportFolder, "export" + timestamp + ".txt");
+            exportCSV = new File(exportFolder, "export" + timestamp + ".csv");
 
 
             //if (!exportCSV.exists()) {
