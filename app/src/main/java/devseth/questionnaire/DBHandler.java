@@ -11,8 +11,6 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static android.content.ContentValues.TAG;
 
@@ -111,11 +109,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void writeToCSV() {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        timestamp = dateFormat.format(new Date());
+        //if you ever want to create unique exports per attempt
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        //timestamp = dateFormat.format(new Date());
 
         File exportFolder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + "SurveyDatabase");
+                File.separator + "C-Aware");
 
 
         if (!exportFolder.exists()) {
@@ -130,7 +129,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         try {
 
-            exportCSV = new File(exportFolder, "export" + timestamp + ".csv");
+            exportCSV = new File(exportFolder, "C-AwareDatabase.csv");
 
 
             //if (!exportCSV.exists()) {
@@ -183,4 +182,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     }
+
+
 }
