@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+
 public class QuestionScreen extends AppCompatActivity implements View.OnClickListener {
 
     //permissions
@@ -34,7 +35,11 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
     Button btnRevert;                                   //the revert button
     RadioButton btnFemale;                              //are you a girl?
     RadioButton btnMale;                                //are you a boy?
+    RadioButton btnHindi;                               //language of survey administration
+    RadioButton btnEnglish;                             //language of survey administration
     Spinner spnEducation;                               //list of educational standards
+    TextView txtEducationLabel;                         //take my info bro - I'm a tag
+    TextView txtLanguage;                               //I'm also a tag bro - I tell what my RadioButtons do
     private QuestionFeeder questionFeeder;              //provides questions
     private DBHandler dbhelper;                         //the DBHandler object which will manage db
     private String[] responses;                         //stores responses
@@ -51,9 +56,13 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         txtQues = (TextView) findViewById(R.id.textView1);
         txtName = (EditText) findViewById(R.id.txtName);
         txtAge = (EditText) findViewById(R.id.txtAge);
+        txtEducationLabel = (TextView) findViewById(R.id.EducationLabel);
+        txtLanguage = (TextView) findViewById(R.id.txtLanguage);
         btnGo = (Button) findViewById(R.id.btnGo);
         btnFemale = (RadioButton) findViewById(R.id.rbFemale);
         btnMale = (RadioButton) findViewById(R.id.rbMale);
+        btnHindi = (RadioButton) findViewById(R.id.rbHindi);
+        btnEnglish = (RadioButton) findViewById(R.id.rbEnglish);
         btnGo.setOnClickListener(this);
         spnEducation = (Spinner) findViewById(R.id.spnEducation);
         background = findViewById(R.id.background);
@@ -63,7 +72,13 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         btnNo.setOnClickListener(this);
         btnRevert = (Button) findViewById(R.id.btnRevert);
         btnRevert.setOnClickListener(this);
+
         questionFeeder = new QuestionFeeder();
+
+        btnEnglish.setVisibility(View.VISIBLE);
+        btnEnglish.setEnabled(true);
+        btnHindi.setEnabled(true);
+        btnHindi.setVisibility(View.VISIBLE);
 
         ArrayAdapter<CharSequence> adapterSpnEducation = ArrayAdapter.createFromResource(this,
                 R.array.education_array, android.R.layout.simple_spinner_item);
@@ -74,12 +89,13 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         // Apply the adapter to the spinner
         spnEducation.setAdapter(adapterSpnEducation);
 
-        responses = new String[26];
+
+        responses = new String[28];
         String blank = "";
         for (int i = 0; i < responses.length; i++)
             responses[i] = blank;
 
-        questionIndex = 1;
+        questionIndex = 3;
 
         isGoOver = false;
 
@@ -92,8 +108,6 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         //Ignition for animation
         bgAnimator();
 
-        //Set the question in the textview
-        txtQues.setText(questionFeeder.nextQuestion());
 
         dbhelper = new DBHandler(getApplicationContext());
 
@@ -113,7 +127,7 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
         if (isGoOver) {
             questionIndex++;
 
-            if (questionIndex == 25)
+            if (questionIndex == 27)
                 isLast = true;
 
             txtQues.setText(questionFeeder.nextQuestion());
@@ -162,18 +176,60 @@ public class QuestionScreen extends AppCompatActivity implements View.OnClickLis
 
             case R.id.btnGo:
 
+                if (btnEnglish.isChecked())
+                    questionFeeder.setLanguage(1);
+                else
+                    questionFeeder.setLanguage(0);
+
+                String edu = "";
+                switch (spnEducation.getSelectedItemPosition()) {
+                    case 0:
+                        edu = "Primary";
+                        break;
+                    case 1:
+                        edu = "Secondary";
+                        break;
+                    case 2:
+                        edu = "Bachelor's";
+                        break;
+                    case 3:
+                        edu = "Master's";
+                        break;
+                    case 4:
+                        edu = "No Formal Education";
+                        break;
+
+
+                }
+
+                responses[2] = edu;
+
+                String name = txtName.getText().toString();
+                responses[3] = name;
+
                 isGoOver = true;
 
+                //Setting up the show backstage before fiddling with the lights
+                //Set the question in the textview
+                txtQues.setText(questionFeeder.nextQuestion());
+
+                //lights on
                 //show question layout, hide name, age input
                 txtQues.setVisibility(View.VISIBLE);
                 btnNo.setVisibility(View.VISIBLE);
                 btnYes.setVisibility(View.VISIBLE);
+
+                //unneeded lights off
                 btnGo.setVisibility(View.INVISIBLE);
                 txtAge.setVisibility(View.INVISIBLE);
                 txtName.setVisibility(View.INVISIBLE);
                 btnMale.setVisibility(View.INVISIBLE);
                 btnFemale.setVisibility(View.INVISIBLE);
+                btnHindi.setVisibility(View.INVISIBLE);
+                btnEnglish.setVisibility(View.INVISIBLE);
+                txtEducationLabel.setVisibility(View.INVISIBLE);
                 spnEducation.setVisibility(View.INVISIBLE);
+                txtLanguage.setVisibility(View.INVISIBLE);
 
                 //add input fields into row array
                 responses[0] = txtAge.getText().toString();

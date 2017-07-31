@@ -3,8 +3,8 @@
     <string-array name="education_array">
         <item>Primary (5th/8th)</item>
         <item>Secondary (10th/12th) </item>
-        <item>Bachelor's Degree</item>
-        <item>Master's Degree</item>
+        <item>Bachelor\'s Degree</item>
+        <item>Master\'s Degree</item>
         <item>No Formal Education</item>
     </string-array>
 </resources>
