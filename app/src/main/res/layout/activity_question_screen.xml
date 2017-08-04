@@ -6,38 +6,45 @@
     android:layout_height="match_parent"
     tools:context="devseth.questionnaire.QuestionScreen">
 
+
     <View
         android:id="@+id/background"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#99ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="60dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="40sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/background" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:weightSum="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/background"
-        android:layout_marginBottom="8dp"
-        android:id="@+id/linearLayout">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <Button
             android:id="@+id/btnYes"
@@ -51,21 +58,16 @@
             android:text="Yes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button3" />
+            app:layout_constraintRight_toLeftOf="parent" />
 
         <Button
             android:id="@+id/btnNo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="48dp"
             android:text="No"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button3" />
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="76dp" />
 
     </LinearLayout>
 
@@ -73,53 +75,131 @@
         android:id="@+id/txtName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="@+id/background"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background" />
 
     <EditText
         android:id="@+id/txtAge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Age"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@+id/txtName"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <Button
         android:id="@+id/btnGo"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:text="Go"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
-
-    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtAge"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/radioGroup"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Start Survey"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <Button
+        android:id="@+id/btnRevert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Go Back"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="@+id/background"
+        app:layout_constraintRight_toRightOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background" />
+
+    <Spinner
+        android:id="@+id/spnEducation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/background"
+        app:layout_constraintTop_toBottomOf="@+id/EducationLabel" />
+
+    <TextView
+        android:id="@+id/EducationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Educational Status"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAge" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="154dp"
+        android:layout_marginRight="154dp"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@+id/rbHindi"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLanguage">
+
+        <RadioButton
+            android:id="@+id/rbHindi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hindi" />
+
+        <RadioButton
+            android:id="@+id/rbEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="English" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:hapticFeedbackEnabled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/txtAge"
+        app:layout_constraintLeft_toRightOf="@+id/txtAge"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
             android:id="@+id/rbFemale"
@@ -129,6 +209,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:onClick="onClick"
             android:text="Female"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -143,11 +224,28 @@
             android:layout_marginTop="27dp"
             android:layout_weight="1"
             android:checked="false"
+            android:onClick="onClick"
             android:text="Male"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtAge" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Survey Language"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="@+id/background"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRevert" />
 
 </android.support.constraint.ConstraintLayout>
